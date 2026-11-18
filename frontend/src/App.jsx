@@ -11,6 +11,7 @@ import PlaceOrder from './pages/PlaceOrder';
 import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
         {/* Not found route */}
         <Route path='/*' element={<NotFound/> }/>
       </Routes>
+      <Footer/>
     </div>
   )
 }
