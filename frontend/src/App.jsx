@@ -12,7 +12,7 @@ import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-
+import SearchBar from './components/SearchBar';
 
 
 const App = () => {
@@ -20,6 +20,7 @@ const App = () => {
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       {/* allow navbar through all pages */}
       <NavBar />
+      <SearchBar/>
       <Routes>
         {/* main routes */}
         <Route path='/' element={<Home /> } />
