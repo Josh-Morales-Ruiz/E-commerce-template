@@ -9,7 +9,28 @@ const createToken = (id) => {
 
 // Route for user login
 const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
+        const user = await userModel.findOne({ email });
+        
+        if (!user) {
+            return res.json({ success: false, message: "user does not exist" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        
+        if (isMatch) {
+            const token = createToken(user._id);
+            res.json({ success: true, token });
+        } else {
+            res.json({ success: false, message: "Invalid credentials" });
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.send({ success: false, message: error.message });
+    }
 }
 
 // Route for user registration
@@ -19,6 +40,7 @@ const registerUser = async (req, res) => {
 
         // checking user already exists
         const exists = await userModel.findOne({ email });
+
         if (exists) {
             return res.json({ success: false, message: "User already exists" });
         }
@@ -57,7 +79,7 @@ const registerUser = async (req, res) => {
 
 // Route for admin login
 const adminLogin = async (req, res) => {
-
+    
 }
 
 export { loginUser, registerUser, adminLogin }
